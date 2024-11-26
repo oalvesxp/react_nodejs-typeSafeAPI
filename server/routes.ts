@@ -79,4 +79,35 @@ export const routes: FastifyPluginAsyncZod = async (app) => {
     return user
   })
 
+  app.patch('/users/:id', {
+    schema: {
+      tags: ['users'],
+      description: 'update user register',
+      params: z.object({
+        id: z.string().uuid()
+      }),
+      body: z.object({
+        name: z.string()
+      }),
+      response: {
+        204: z.null(),
+        404: z.object({
+          message: z.string()
+        })
+      }
+    }
+  }, async (req, rep) => {
+    const { id } = req.params
+    const userIndex = users.findIndex(item => item.id === id)
+    const user = { id, name: req.body.name }
+
+    if (userIndex < 0) {
+      return rep.status(404).send({ message: 'User not found.' })
+    }
+
+    users[userIndex] = user
+
+    return rep.status(204).send()
+  })
+
 }
