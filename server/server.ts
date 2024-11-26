@@ -2,8 +2,17 @@ import fastifyCors from '@fastify/cors'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
 import fastify from 'fastify'
+import {
+  validatorCompiler,
+  serializerCompiler,
+  jsonSchemaTransform
+} from 'fastify-type-provider-zod'
+import { routes } from './routes'
 
 const app = fastify()
+
+app.setValidatorCompiler(validatorCompiler)
+app.setSerializerCompiler(serializerCompiler)
 
 /** registers */
 app.register(fastifyCors, {
@@ -16,15 +25,17 @@ app.register(fastifySwagger, {
       title: 'typed full-stack',
       version: '1.0.0'
     }
-  }
+  },
+  transform: jsonSchemaTransform
 })
+
+app.register(routes)
 
 app.register(fastifySwaggerUi, {
   routePrefix: 'docs'
 })
 
-/** routes */
-app.get('/', (_, rep) => rep.status(200).send({ hello: 'world' }))
+
 
 /** server */
 app.listen({ port: 3333 }).then(() => {
