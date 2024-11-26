@@ -53,7 +53,7 @@ export const routes: FastifyPluginAsyncZod = async (app) => {
   app.get('/users/:id', {
     schema: {
       tags: ['users'],
-      description: 'list a user by id',
+      description: 'list an user by id',
       params: z.object({
         id: z.string().uuid()
       }),
@@ -110,4 +110,30 @@ export const routes: FastifyPluginAsyncZod = async (app) => {
     return rep.status(204).send()
   })
 
+  app.delete('/users/:id', {
+    schema: {
+      tags: ['users'],
+      description: 'delete an user by id',
+      params: z.object({
+        id: z.string().uuid()
+      }),
+      response: {
+        204: z.null(),
+        404: z.object({
+          message: z.string()
+        })
+      }
+    }
+  }, async (req, rep) => {
+    const { id } = req.params
+    const userIndex = users.findIndex(item => item.id === id)
+
+    if (userIndex < 0) {
+      return rep.status(404).send({ message: 'User not Found' })
+    }
+
+    users.splice(userIndex, 1)
+
+    return rep.status(204).send()
+  })
 }
