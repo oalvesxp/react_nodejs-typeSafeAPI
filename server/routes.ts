@@ -19,7 +19,7 @@ export const routes: FastifyPluginAsyncZod = async (app) => {
         name: z.string()
       }),
       response: {
-        201: z.null()
+        201: z.object({})
       }
     }
   }, async (req, rep) => {
@@ -30,7 +30,7 @@ export const routes: FastifyPluginAsyncZod = async (app) => {
       name
     })
 
-    return rep.status(201).send()
+    return rep.status(201).send({})
 
   })
 

@@ -69,16 +69,7 @@ export type ListUsers200Item = {
   name: string;
 };
 
-/**
- * @nullable
- */
-export type CreateUser201 = typeof CreateUser201[keyof typeof CreateUser201] | null;
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const CreateUser201 = {
-  null: 'null',
-} as const;
+export type CreateUser201 = { [key: string]: unknown };
 
 export type CreateUserBody = {
   name: string;

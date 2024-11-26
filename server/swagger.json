@@ -40,10 +40,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "enum": [
-                    "null"
-                  ],
-                  "nullable": true
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": false
                 }
               }
             }

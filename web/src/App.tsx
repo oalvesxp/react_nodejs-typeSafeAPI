@@ -1,3 +1,4 @@
+import CreateUser from './CreateUser'
 import { useListUsers } from './http/generated/api'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           )
         })}
       </ul>
+      <CreateUser />
     </>
   )
 }
