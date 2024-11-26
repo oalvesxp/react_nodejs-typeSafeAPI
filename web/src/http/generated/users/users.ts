@@ -21,61 +21,18 @@ import type {
   UseQueryOptions,
   UseQueryResult
 } from '@tanstack/react-query'
-export type DeleteUser404 = {
-  message: string;
-};
-
-/**
- * @nullable
- */
-export type DeleteUser204 = typeof DeleteUser204[keyof typeof DeleteUser204] | null;
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const DeleteUser204 = {
-  null: 'null',
-} as const;
-
-export type UpdateUser404 = {
-  message: string;
-};
-
-/**
- * @nullable
- */
-export type UpdateUser204 = typeof UpdateUser204[keyof typeof UpdateUser204] | null;
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const UpdateUser204 = {
-  null: 'null',
-} as const;
-
-export type UpdateUserBody = {
-  name: string;
-};
-
-export type GetUser404 = {
-  message: string;
-};
-
-export type GetUser200 = {
-  id: string;
-  name: string;
-};
-
-export type ListUsers200Item = {
-  id: string;
-  name: string;
-};
-
-export type CreateUser201 = { [key: string]: unknown };
-
-export type CreateUserBody = {
-  name: string;
-};
-
-
+import type {
+  CreateUser201,
+  CreateUserBody,
+  DeleteUser204,
+  DeleteUser404,
+  GetUser200,
+  GetUser404,
+  ListUsers200Item,
+  UpdateUser204,
+  UpdateUser404,
+  UpdateUserBody
+} from '../api.schemas'
 
 
 
@@ -150,8 +107,7 @@ const {mutation: mutationOptions, fetch: fetchOptions} = options ?? {};
 
       return useMutation(mutationOptions);
     }
-    
-/**
+    /**
  * list users
  */
 export type listUsersResponse = {
@@ -249,7 +205,6 @@ export function useListUsers<TData = Awaited<ReturnType<typeof listUsers>>, TErr
 
   return query;
 }
-
 
 
 
@@ -354,7 +309,6 @@ export function useGetUser<TData = Awaited<ReturnType<typeof getUser>>, TError =
 
 
 
-
 /**
  * update user register
  */
@@ -427,8 +381,7 @@ const {mutation: mutationOptions, fetch: fetchOptions} = options ?? {};
 
       return useMutation(mutationOptions);
     }
-    
-/**
+    /**
  * delete an user by id
  */
 export type deleteUserResponse = {

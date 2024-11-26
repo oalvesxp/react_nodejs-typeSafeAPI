@@ -1,5 +1,5 @@
 import CreateUser from './CreateUser'
-import { useListUsers } from './http/generated/api'
+import { useListUsers } from './http/generated/users/users'
 
 function App() {
   const { data: users } = useListUsers()
@@ -13,6 +13,7 @@ function App() {
           )
         })}
       </ul>
+
       <CreateUser />
     </>
   )

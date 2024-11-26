@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { getListUsersQueryKey, useCreateUser } from './http/generated/api'
+import { getListUsersQueryKey, useCreateUser } from './http/generated/users/users'
 import { useQueryClient } from '@tanstack/react-query'
 
 const createUserSchema = z.object({
