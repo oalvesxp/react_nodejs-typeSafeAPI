@@ -5,11 +5,12 @@ import fastify from 'fastify'
 import {
   validatorCompiler,
   serializerCompiler,
-  jsonSchemaTransform
+  jsonSchemaTransform,
+  ZodTypeProvider
 } from 'fastify-type-provider-zod'
 import { routes } from './routes'
 
-const app = fastify()
+const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)

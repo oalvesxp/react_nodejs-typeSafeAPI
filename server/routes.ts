@@ -1,4 +1,5 @@
-import { FastifyInstance } from 'fastify'
+import { randomUUID } from 'crypto'
+import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 interface User {
@@ -8,7 +9,30 @@ interface User {
 
 const users: User[] = []
 
-export async function routes(app: FastifyInstance) {
+export const routes: FastifyPluginAsyncZod = async (app) => {
+  app.post('/users', {
+    schema: {
+      tags: ['users'],
+      description: 'register users',
+      body: z.object({
+        name: z.string()
+      }),
+      response: {
+        201: z.null()
+      }
+    }
+  }, async (req, rep) => {
+    const { name } = req.body
+
+    users.push({
+      id: randomUUID(),
+      name
+    })
+
+    return rep.status(201).send()
+
+  })
+
   app.get('/users', {
     schema: {
       tags: ['users'],
