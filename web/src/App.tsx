@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react'
-import { listUsers, type ListUsers200Item } from './http/generated/api'
+import { useListUsers } from './http/generated/api'
 
 function App() {
-  const [users, setUsers] = useState<ListUsers200Item[]>([])
-
-  useEffect(() => {
-    listUsers().then(users => {
-      setUsers(users.data)
-    })
-  })
+  const { data: users } = useListUsers()
 
   return (
     <>
       <ul>
-        {users.map(user => {
+        {users?.data.map(user => {
           return (
             <li key={user.id}>{user.name}</li>
           )
