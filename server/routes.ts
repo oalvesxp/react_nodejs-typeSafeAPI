@@ -14,6 +14,7 @@ export const routes: FastifyPluginAsyncZod = async (app) => {
     schema: {
       tags: ['users'],
       description: 'register users',
+      operationId: 'createUser',
       body: z.object({
         name: z.string()
       }),
@@ -37,6 +38,7 @@ export const routes: FastifyPluginAsyncZod = async (app) => {
     schema: {
       tags: ['users'],
       description: 'list users',
+      operationId: 'listUsers',
       response: {
         200: z.array(
           z.object({
@@ -54,6 +56,7 @@ export const routes: FastifyPluginAsyncZod = async (app) => {
     schema: {
       tags: ['users'],
       description: 'list an user by id',
+      operationId: 'getUser',
       params: z.object({
         id: z.string().uuid()
       }),
@@ -83,6 +86,7 @@ export const routes: FastifyPluginAsyncZod = async (app) => {
     schema: {
       tags: ['users'],
       description: 'update user register',
+      operationId: 'updateUser',
       params: z.object({
         id: z.string().uuid()
       }),
@@ -114,6 +118,7 @@ export const routes: FastifyPluginAsyncZod = async (app) => {
     schema: {
       tags: ['users'],
       description: 'delete an user by id',
+      operationId: 'deleteUser',
       params: z.object({
         id: z.string().uuid()
       }),
